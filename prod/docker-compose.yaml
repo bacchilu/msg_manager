@@ -1,6 +1,6 @@
 services:
   rabbitmq:
-    image: rabbitmq:4.2.0-management
+    image: rabbitmq:4.2.1-management
     expose: ["5672"]
     environment:
       RABBITMQ_DEFAULT_USER: admin

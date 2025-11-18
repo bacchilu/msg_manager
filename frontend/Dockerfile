@@ -1,4 +1,4 @@
-FROM node:25.2.0
+FROM node:25.2.1
 LABEL maintainer="Luca Bacchi <bacchilu@gmail.com> (https://github.com/bacchilu)"
 
 ARG USER_ID
