@@ -1,5 +1,5 @@
-__all__ = ["MessageStore", "UsersStore", "MockDB", "UserDB"]
+__all__ = ["DataGateway", "MockDB"]
 
 
-from .mock_db import MockDB, UserDB
-from .types import MessageStore, UsersStore
+from .mock_db import MockDB
+from .types import DataGateway

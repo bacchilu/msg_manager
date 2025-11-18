@@ -1,18 +1,18 @@
 __all__ = ["MessagesService"]
 
 
-from ..data_gateway import MessageStore
+from ..data_gateway import DataGateway
 from ..entities import WebhookMessage
 
 DB: list[WebhookMessage] = []
 
 
 class MessagesService:
-    def __init__(self, db: MessageStore):
+    def __init__(self, db: DataGateway):
         self.db = db
 
     def push(self, dto_message: WebhookMessage):
-        self.db.push_message(dto_message)
+        self.db.Message.push_message(dto_message)
 
     def get_messages(self) -> list[WebhookMessage]:
-        return self.db.get_messages()
+        return self.db.Message.get_messages()

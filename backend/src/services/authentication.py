@@ -1,12 +1,12 @@
 __all__ = ["Authentication"]
 
-from ..data_gateway import UsersStore
+from ..data_gateway import DataGateway
 from ..data_gateway.types import User
 
 
 class Authentication:
-    def __init__(self, db: UsersStore):
+    def __init__(self, db: DataGateway):
         self.db = db
 
     def login(self, username: str, password: str) -> User:
-        return self.db.check_auth(username, password)
+        return self.db.User.check_auth(username, password)

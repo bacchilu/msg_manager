@@ -5,7 +5,7 @@ import logging
 from fastapi import APIRouter, HTTPException, status
 from pydantic import BaseModel
 
-from ..data_gateway import UserDB
+from ..data_gateway import MockDB
 from ..data_gateway.types import User
 from ..services import Authentication
 
@@ -18,7 +18,7 @@ class AuthRequest(BaseModel):
 
 
 router = APIRouter(prefix="/auth", tags=["auth"])
-authentication_service = Authentication(UserDB)
+authentication_service = Authentication(MockDB())
 
 
 @router.post("/")

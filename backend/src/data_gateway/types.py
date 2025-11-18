@@ -1,4 +1,4 @@
-__all__ = ["MessageStore", "UsersStore"]
+__all__ = ["MessageStore", "UsersStore", "DataGateway"]
 
 
 from typing import Protocol, runtime_checkable
@@ -19,3 +19,9 @@ class MessageStore(Protocol):
 class UsersStore(Protocol):
     @classmethod
     def check_auth(cls, username: str, password: str) -> User: ...
+
+
+@runtime_checkable
+class DataGateway(Protocol):
+    Message: MessageStore
+    User: UsersStore

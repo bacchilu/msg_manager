@@ -15,7 +15,7 @@ from ..services import MessagesService
 logger = logging.getLogger(__name__)
 
 
-messages_service = MessagesService(MockDB)
+messages_service = MessagesService(MockDB())
 
 
 class TextMessage(BaseModel):

@@ -1,4 +1,4 @@
-__all__ = ["MockDB", "UserDB"]
+__all__ = ["MockDB"]
 
 
 from datetime import datetime, timedelta, timezone
@@ -48,8 +48,8 @@ def _generate_fake_messages() -> list[WebhookMessage]:
 FAKE_MESSAGES: list[WebhookMessage] = _generate_fake_messages()
 
 
-class MockDB(MessageStore):
-    _db: list[WebhookMessage] = FAKE_MESSAGES
+class MessageDB(MessageStore):
+    _db: list[WebhookMessage] = list(FAKE_MESSAGES)
 
     @classmethod
     def push_message(cls, message: WebhookMessage) -> None:
@@ -64,3 +64,8 @@ class UserDB(UsersStore):
     @classmethod
     def check_auth(cls, username: str, password: str) -> User:
         return User(id=1, username="bacchilu@gmail.com", password="bacchilu")
+
+
+class MockDB:
+    Message: MessageStore = MessageDB
+    User: UsersStore = UserDB
