@@ -1,12 +1,12 @@
-__all__ = ["MockDB"]
+__all__ = ["MockDB", "UserDB"]
 
 
 from datetime import datetime, timedelta, timezone
 from random import choice, randint, sample
 from uuid import uuid4
 
-from ..entities import TextMessage, WebhookMessage
-from .types import MessageStore
+from ..entities import TextMessage, User, WebhookMessage
+from .types import MessageStore, UsersStore
 
 _MESSAGE_SNIPPETS = [
     "Follow-up #{index} re: onboarding flow",
@@ -58,3 +58,9 @@ class MockDB(MessageStore):
     @classmethod
     def get_messages(cls) -> list[WebhookMessage]:
         return cls._db
+
+
+class UserDB(UsersStore):
+    @classmethod
+    def check_auth(cls, username: str, password: str) -> User:
+        return User(id=1, username="bacchilu@gmail.com", password="bacchilu")

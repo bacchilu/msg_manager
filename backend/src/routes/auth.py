@@ -5,6 +5,8 @@ import logging
 from fastapi import APIRouter, HTTPException, status
 from pydantic import BaseModel
 
+from ..data_gateway import UserDB
+from ..data_gateway.types import User
 from ..services import Authentication
 
 logger = logging.getLogger(__name__)
@@ -16,14 +18,15 @@ class AuthRequest(BaseModel):
 
 
 router = APIRouter(prefix="/auth", tags=["auth"])
-authentication_service = Authentication()
+authentication_service = Authentication(UserDB)
 
 
 @router.post("/")
-async def authenticate(payload: AuthRequest) -> AuthRequest:
+async def authenticate(payload: AuthRequest) -> User:
     logger.info("Auth attempt for user %s", payload.username)
-    if not authentication_service.login(payload.username, payload.password):
+    user: User = authentication_service.login(payload.username, payload.password)
+    if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials"
         )
-    return payload
+    return user
