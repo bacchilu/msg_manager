@@ -1,7 +1,7 @@
 __all__ = ["Authentication"]
 
 from ..data_gateway import DataGateway
-from ..data_gateway.types import User
+from ..data_gateway.types import User, UserNotFoundError
 
 
 class Authentication:
@@ -9,4 +9,11 @@ class Authentication:
         self.db = db
 
     def login(self, username: str, password: str) -> User:
-        return self.db.User.check_auth(username, password)
+        """
+        Raises:
+            UserNotFoundError: If the user does not exist.
+        """
+        user: User = self.db.User.get_user_by_username(username)
+        if user.password != password:
+            raise UserNotFoundError()
+        return user

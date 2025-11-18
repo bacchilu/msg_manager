@@ -6,7 +6,7 @@ from random import choice, randint, sample
 from uuid import uuid4
 
 from ..entities import TextMessage, User, WebhookMessage
-from .types import MessageStore, UsersStore
+from .types import MessageStore, UserNotFoundError, UsersStore
 
 _MESSAGE_SNIPPETS = [
     "Follow-up #{index} re: onboarding flow",
@@ -60,10 +60,18 @@ class MessageDB(MessageStore):
         return cls._db
 
 
+FAKE_USERS: list[User] = [
+    User(id=1, username="bacchilu@gmail.com", password="bacchilu")
+]
+
+
 class UserDB(UsersStore):
     @classmethod
-    def check_auth(cls, username: str, password: str) -> User:
-        return User(id=1, username="bacchilu@gmail.com", password="bacchilu")
+    def get_user_by_username(cls, username: str) -> User:
+        try:
+            return [item for item in FAKE_USERS if item.username == username][0]
+        except IndexError:
+            raise UserNotFoundError()
 
 
 class MockDB:
