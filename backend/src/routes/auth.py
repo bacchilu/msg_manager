@@ -6,8 +6,8 @@ from fastapi import APIRouter, HTTPException, status
 from pydantic import BaseModel
 
 from ..data_gateway import MockDB
-from ..data_gateway.types import User, UserNotFoundError
-from ..services import Authentication
+from ..data_gateway.types import UserNotFoundError
+from ..services import Authentication, Token
 
 logger = logging.getLogger(__name__)
 
@@ -22,7 +22,7 @@ authentication_service = Authentication(MockDB())
 
 
 @router.post("/")
-async def authenticate(payload: AuthRequest) -> User:
+async def authenticate(payload: AuthRequest) -> Token:
     logger.info("Auth attempt for user %s", payload.username)
     try:
         return authentication_service.login(payload.username, payload.password)

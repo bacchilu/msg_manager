@@ -1,5 +1,5 @@
-__all__ = ["Authentication", "MessagesService"]
+__all__ = ["Authentication", "MessagesService", "Token"]
 
 
-from .authentication import Authentication
+from .authentication import Authentication, Token
 from .messages import MessagesService
