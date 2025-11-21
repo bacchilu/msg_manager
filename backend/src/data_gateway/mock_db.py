@@ -7,7 +7,7 @@ from uuid import uuid4
 
 from .types import MessageStore, UserNotFoundError, UsersStore
 from .types.message import TextMessage, WebhookMessage
-from .types.user import User
+from .types.user import RawUser
 
 _MESSAGE_SNIPPETS = [
     "Follow-up #{index} re: onboarding flow",
@@ -61,14 +61,14 @@ class MessageDB(MessageStore):
         return cls._db
 
 
-FAKE_USERS: list[User] = [
-    User(id=1, username="bacchilu@gmail.com", password="bacchilu")
+FAKE_USERS: list[RawUser] = [
+    RawUser(id=1, username="bacchilu@gmail.com", password="bacchilu")
 ]
 
 
 class UserDB(UsersStore):
     @classmethod
-    def get_user_by_username(cls, username: str) -> User:
+    def get_user_by_username(cls, username: str) -> RawUser:
         try:
             return [item for item in FAKE_USERS if item.username == username][0]
         except IndexError:

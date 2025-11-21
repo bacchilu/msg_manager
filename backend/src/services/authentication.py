@@ -4,7 +4,7 @@ from dataclasses import dataclass
 
 from ..data_gateway import DataGateway
 from ..data_gateway.types import UserNotFoundError
-from ..data_gateway.types.user import User as UserDB
+from ..data_gateway.types.user import RawUser
 from ..utils.jwt_utils import encode_jwt
 
 
@@ -29,7 +29,7 @@ class Authentication:
         Raises:
             UserNotFoundError: If the user does not exist.
         """
-        user: UserDB = self.db.User.get_user_by_username(username)
+        user: RawUser = self.db.User.get_user_by_username(username)
         if user.password != password:
             raise UserNotFoundError()
         return Token(

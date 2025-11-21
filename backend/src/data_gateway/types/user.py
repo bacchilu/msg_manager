@@ -1,10 +1,10 @@
-__all__ = ["User"]
+__all__ = ["RawUser"]
 
 from dataclasses import dataclass
 
 
 @dataclass(frozen=True)
-class User:
+class RawUser:
     id: int
     username: str
     password: str

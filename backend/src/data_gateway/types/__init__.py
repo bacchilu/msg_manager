@@ -5,7 +5,7 @@ __all__ = ["MessageStore", "UsersStore", "DataGateway", "UserNotFoundError"]
 from typing import Protocol, runtime_checkable
 
 from .message import WebhookMessage
-from .user import User
+from .user import RawUser
 
 
 class UserNotFoundError(Exception):
@@ -24,7 +24,7 @@ class MessageStore(Protocol):
 @runtime_checkable
 class UsersStore(Protocol):
     @classmethod
-    def get_user_by_username(cls, username: str) -> User:
+    def get_user_by_username(cls, username: str) -> RawUser:
         """
         Looks up a user by username.
 
