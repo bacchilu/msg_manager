@@ -7,7 +7,8 @@ from pydantic import BaseModel
 
 from ..data_gateway import MockDB
 from ..data_gateway.types import UserNotFoundError
-from ..services import Authentication, Token
+from ..services.authentication import Authentication
+from ..services.authentication.types import Token
 
 logger = logging.getLogger(__name__)
 

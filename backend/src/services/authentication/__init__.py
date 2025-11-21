@@ -1,23 +1,10 @@
 __all__ = ["Authentication", "Token"]
 
-from dataclasses import dataclass
-
-from ..data_gateway import DataGateway
-from ..data_gateway.types import UserNotFoundError
-from ..data_gateway.types.user import RawUser
-from ..utils.jwt_utils import encode_jwt
-
-
-@dataclass(frozen=True)
-class User:
-    id: int
-    username: str
-
-
-@dataclass(frozen=True)
-class Token:
-    token: str
-    user: User
+from ...data_gateway import DataGateway
+from ...data_gateway.types import UserNotFoundError
+from ...data_gateway.types.user import RawUser
+from ...utils.jwt_utils import encode_jwt
+from .types import Token, User
 
 
 class Authentication:

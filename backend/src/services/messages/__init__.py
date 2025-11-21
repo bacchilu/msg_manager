@@ -1,10 +1,7 @@
 __all__ = ["MessagesService"]
 
-
-from ..data_gateway import DataGateway
-from ..data_gateway.types.message import WebhookMessage
-
-DB: list[WebhookMessage] = []
+from ...data_gateway import DataGateway
+from ...data_gateway.types.message import WebhookMessage
 
 
 class MessagesService:

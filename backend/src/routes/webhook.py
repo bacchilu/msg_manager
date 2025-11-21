@@ -10,7 +10,7 @@ from pydantic import BaseModel, ConfigDict
 
 from ..data_gateway import MockDB
 from ..data_gateway.types.message import WebhookMessage as WebhookMessageEntity
-from ..services import MessagesService
+from ..services.messages import MessagesService
 
 logger = logging.getLogger(__name__)
 
