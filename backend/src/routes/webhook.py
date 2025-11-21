@@ -9,7 +9,7 @@ from fastapi import APIRouter
 from pydantic import BaseModel, ConfigDict
 
 from ..data_gateway import MockDB
-from ..entities import WebhookMessage as WebhookMessageEntity
+from ..data_gateway.types.message import WebhookMessage as WebhookMessageEntity
 from ..services import MessagesService
 
 logger = logging.getLogger(__name__)

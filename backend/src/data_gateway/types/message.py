@@ -1,5 +1,4 @@
-__all__ = ["WebhookMessage", "TextMessage"]
-
+__all__ = ["WebhookMessage", "TextMessage", "UnsupportedMessage"]
 
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone

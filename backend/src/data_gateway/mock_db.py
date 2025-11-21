@@ -5,8 +5,9 @@ from datetime import datetime, timedelta, timezone
 from random import choice, randint, sample
 from uuid import uuid4
 
-from ..entities import TextMessage, User, WebhookMessage
 from .types import MessageStore, UserNotFoundError, UsersStore
+from .types.message import TextMessage, WebhookMessage
+from .types.user import User
 
 _MESSAGE_SNIPPETS = [
     "Follow-up #{index} re: onboarding flow",

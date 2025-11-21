@@ -1,9 +1,11 @@
-__all__ = ["MessageStore", "UsersStore", "DataGateway", "UserNotFoundError"]
+"""Protocols defining the gateway interfaces for users and messages."""
 
+__all__ = ["MessageStore", "UsersStore", "DataGateway", "UserNotFoundError"]
 
 from typing import Protocol, runtime_checkable
 
-from ..entities import User, WebhookMessage
+from .message import WebhookMessage
+from .user import User
 
 
 class UserNotFoundError(Exception):
