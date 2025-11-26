@@ -1,11 +1,26 @@
+import axios from 'axios';
 import React from 'react';
+import z from 'zod';
 
-const useSetShow = function (): [boolean, () => void] {
-    const [showAlert, setShowAlert] = React.useState<boolean>(false);
+const AuthResponseSchema = z.object({token: z.string(), user: z.object({id: z.number(), username: z.string()})});
+type AuthResponseSchemaInput = z.input<typeof AuthResponseSchema>;
+type AuthResponseSchemaOutput = z.output<typeof AuthResponseSchema>;
+
+const doAuthenticate = async function (username: string, password: string): Promise<AuthResponseSchemaOutput> {
+    try {
+        const response = await axios.post<AuthResponseSchemaInput>('/api/auth/', {username, password});
+        return AuthResponseSchema.parse(response.data);
+    } catch (error: unknown) {
+        throw new Error('Authentication failed');
+    }
+};
+
+const useSetShow = function (): [string, (msg: string) => void] {
+    const [showAlert, setShowAlert] = React.useState<string>('');
     React.useEffect(() => {
         if (!showAlert) return;
         const timeoutId: number = setTimeout(() => {
-            setShowAlert(false);
+            setShowAlert('');
         }, 5000);
 
         return () => {
@@ -13,7 +28,7 @@ const useSetShow = function (): [boolean, () => void] {
         };
     }, [showAlert]);
 
-    return [showAlert, () => setShowAlert(true)];
+    return [showAlert, (msg: string) => setShowAlert(msg)];
 };
 
 export const AuthPage = function () {
@@ -28,10 +43,14 @@ export const AuthPage = function () {
         };
     };
 
-    const handleSubmit = function (event: React.FormEvent<HTMLFormElement>) {
+    const handleSubmit = async function (event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        console.log({authEmail, authPassword});
-        setShowAlert();
+        try {
+            const res: AuthResponseSchemaOutput = await doAuthenticate(authEmail, authPassword);
+            console.log(res);
+        } catch (e: unknown) {
+            if (e instanceof Error) setShowAlert(e.message);
+        }
     };
 
     return (
@@ -74,9 +93,9 @@ export const AuthPage = function () {
                             Enter workspace
                         </button>
                     </div>
-                    {showAlert && (
+                    {showAlert !== '' && (
                         <div className="alert alert-danger mt-3 mb-0" role="alert">
-                            Authentication is not yet implemented.
+                            {showAlert}
                         </div>
                     )}
                 </form>
