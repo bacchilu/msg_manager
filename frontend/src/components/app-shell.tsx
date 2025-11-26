@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {useMessages} from '../hooks/useMessages';
+import {useMessages} from '../hooks/use-messages';
 import {MainPanel} from './main-panel';
 import {ErrorMessage} from './messages';
 import {MessagesSidebar} from './sidebar';

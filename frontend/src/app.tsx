@@ -1,10 +1,10 @@
 import {Route, Routes} from 'react-router';
 
-import './App.css';
-import {AuthPage} from './pages/AuthPage';
-import {HomePage} from './pages/HomePage';
-import {NotFoundPage} from './pages/NotFoundPage';
-import {ThreadPage} from './pages/ThreadPage';
+import './app.css';
+import {AuthPage} from './pages/auth-page';
+import {HomePage} from './pages/home-page';
+import {NotFoundPage} from './pages/not-found-page';
+import {ThreadPage} from './pages/thread-page';
 
 export const App = function () {
     return (

@@ -1,7 +1,7 @@
 import groupBy from 'lodash/groupBy.js';
 import React from 'react';
 
-import {useMessages} from '../hooks/useMessages';
+import {useMessages} from '../hooks/use-messages';
 
 export type SidebarItem = {
     thread_id: string;

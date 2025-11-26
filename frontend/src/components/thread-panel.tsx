@@ -1,7 +1,7 @@
 import groupBy from 'lodash/groupBy.js';
 
 import {MessageType, type Message, type TextMessage} from '../entities/messages';
-import {useMessages} from '../hooks/useMessages';
+import {useMessages} from '../hooks/use-messages';
 
 const TextMessageWidget: React.FC<{msg: TextMessage}> = function ({msg}) {
     return (
